@@ -48,3 +48,7 @@ export function watDayRange(from?: string, to?: string) {
     to: to ? `${nextDay(to)}T00:00:00+01:00` : undefined,
   };
 }
+
+const dayFormat = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", day: "numeric", month: "short", year: "numeric" });
+/** "20 Feb 2027" for a date-only value (election day), which the API sends as midnight UTC */
+export const formatDay = (iso: string) => dayFormat.format(new Date(iso));

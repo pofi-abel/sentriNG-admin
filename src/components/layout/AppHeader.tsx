@@ -10,12 +10,13 @@ import { SESSION_WARNING_MS } from "@/lib/constants";
 import type { Analyst } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
+// Roster import and assignments are observer tasks: buttons on the Observers page, so the header fits at 1280 px
 const NAV = [
   { to: "/observers", label: "Observers" },
-  { to: "/import", label: "Import roster" },
-  { to: "/assignments", label: "Assignments" },
+  { to: "/analysts", label: "Analysts" },
   { to: "/onboarding", label: "Onboarding" },
   { to: "/audit", label: "Audit log" },
+  { to: "/reference", label: "Reference data" },
 ] as const;
 
 interface AppHeaderProps {
@@ -38,7 +39,7 @@ export function AppHeader({ admin, msLeft, onLogout }: AppHeaderProps) {
             <Link
               key={item.to}
               to={item.to}
-              className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 font-medium text-muted-foreground hover:bg-surface-raised hover:text-foreground"
+              className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 font-medium whitespace-nowrap text-muted-foreground hover:bg-surface-raised hover:text-foreground"
               activeProps={{ className: "bg-surface-raised text-foreground", "aria-current": "page" }}
             >
               {item.label}
@@ -54,7 +55,7 @@ export function AppHeader({ admin, msLeft, onLogout }: AppHeaderProps) {
               <span aria-hidden className="grid size-7 place-items-center rounded-full bg-surface-raised text-xs font-semibold text-foreground">
                 {initials(admin.name)}
               </span>
-              <span className="text-muted-foreground">{admin.name}</span>
+              <span className="whitespace-nowrap text-muted-foreground">{admin.name}</span>
             </span>
           ) : (
             <Skeleton className="h-7 w-28" />

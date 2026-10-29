@@ -15,6 +15,8 @@ console that issues credentials** (brand §3).
   word is clearer than a padlock.
 - **Density: Calm (5).** Lists are long, but operators act on one observer at a time, so it is less dense than the desk.
 - **No hotkeys.** Operators use the console for occasional, deliberate work, not twelve-hour queue shifts.
+- **Five sections in the header** (Observers, Analysts, Onboarding, Audit log, Reference data), so it fits at 1280 px.
+  Roster import and assignments are observer tasks: outline buttons on the Observers page, with a back arrow on theirs.
 
 ## 2. Status
 
@@ -68,7 +70,29 @@ An observer with no polling units shows "None" in amber: results from them are r
   - Observer refs link to the observer. Results show their PU code, incidents their uuid, escalations `#id`.
   - Filters sit on the right of the title: what, who, from, to. Days are WAT days.
 
-## 6. Copy
+## 6. Analyst accounts
+
+- Status chips: Active (verified green, `CheckmarkCircle02Icon`), Disabled (critical red, `UserBlock01Icon`, the
+  brand's Revoke), "Can't log in" (warning amber, `Alert02Icon`, when the password or authenticator is missing). The
+  "Admin" chip is a role, not a status: neutral, no icon.
+- Actions sit on the right of the title: log out everywhere (`Logout01Icon`), reset password (`ResetPasswordIcon`,
+  added to the brand icon map), reset authenticator (`QrCodeIcon`: it hands out a QR), then Disable (reject style; the
+  operator types the email) or Enable (approve style). Admin accounts show none of these, and say why.
+- The **credential slip** is Paper like the enrollment cards. It shows the Desk lockup (the analyst uses SentriNG Desk),
+  name, email, the password large in mono, the authenticator QR, and the key in groups of four for typing. It has the
+  same accent banner, print button and leave-page guard as codes.
+
+## 7. Reference data
+
+- One page: **Elections** first (table, newest first, "Held in" lists state names or a muted "Nationwide"), then
+  **Import CSV**.
+- The election dialog takes name, race and date, plus a checkbox grid of states (none ticked = nationwide). Editing
+  locks race and date and says why. Taking a state out warns, in amber, that results already sent from it stay.
+- An import is checked as soon as the file is chosen. The diff is one line per kind of change ("312 new polling units",
+  "4 polling units renamed"), with up to five examples in mono and "and N more". It says that nothing is deleted.
+  "Apply these changes" shows only when something would change; a file that changes nothing says so.
+
+## 8. Copy
 
 Plain and specific, as on the desk:
 - Say what happened and what to do next ("No polling unit has the code 99-99-99-999").

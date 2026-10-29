@@ -1,11 +1,13 @@
 // Observers: search by ref or CSO, filter by status, page through thousands
 import { useEffect, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Csv01Icon, MapPinCheckIcon } from "@hugeicons/core-free-icons";
 import { z } from "zod";
 import { ErrorBanner } from "@/components/layout/ErrorBanner";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ObserversTable } from "@/components/observers/ObserversTable";
 import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useObserversQuery } from "@/core/queries/observers.q";
@@ -46,6 +48,18 @@ function ObserversPage() {
   return (
     <>
       <PageHeader title="Observers">
+        <Button variant="outline" asChild>
+          <Link to="/import">
+            <Icon icon={Csv01Icon} />
+            Import roster
+          </Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link to="/assignments">
+            <Icon icon={MapPinCheckIcon} />
+            Assignments
+          </Link>
+        </Button>
         <form
           role="search"
           onSubmit={(e) => {

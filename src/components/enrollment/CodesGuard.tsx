@@ -1,4 +1,5 @@
-// Codes are shown once. While they're on screen, leaving the page asks first; closing the tab gets the browser's prompt.
+// Codes and sign-in details are shown once. While they're on screen, leaving the page asks first; closing the tab gets
+// the browser's prompt.
 // Going to login (log out, idle lock, session end) is never held up: those must clear the codes off an unattended screen
 import { useBlocker } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -18,8 +19,8 @@ export function CodesGuard({ active }: { active: boolean }) {
         <DialogHeader>
           <DialogTitle>Leave without printing?</DialogTitle>
           <DialogDescription>
-            These codes can't be shown again. If they aren't printed yet, you'll have to re-issue them, and any copy already
-            handed out stops working.
+            What's on this page can't be shown again. If it isn't printed or handed over yet, you'll have to issue it again,
+            and any copy already handed out stops working.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -27,7 +28,7 @@ export function CodesGuard({ active }: { active: boolean }) {
             Stay on this page
           </Button>
           <Button variant="destructive" onClick={() => blocker.proceed?.()}>
-            Leave and discard codes
+            Leave and discard
           </Button>
         </DialogFooter>
       </DialogContent>

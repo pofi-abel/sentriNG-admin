@@ -3,14 +3,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { ErrorBanner } from "@/components/layout/ErrorBanner";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { AuditTable } from "@/components/oversight/AuditTable";
+import { AuditTable, ENTITY_LABEL } from "@/components/oversight/AuditTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useAnalystsQuery, useAuditQuery } from "@/core/queries/oversight.q";
+import { useAnalystsQuery } from "@/core/queries/analysts.q";
+import { useAuditQuery } from "@/core/queries/oversight.q";
 import { PAGE_SIZE } from "@/lib/constants";
 import { AUDIT_ENTITIES, type AuditEntity } from "@/lib/types";
-import { humanize, watDayRange } from "@/lib/utils";
+import { watDayRange } from "@/lib/utils";
 
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 
@@ -55,7 +56,7 @@ function AuditPage() {
             <SelectItem value={ANY}>Everything</SelectItem>
             {AUDIT_ENTITIES.map((e) => (
               <SelectItem key={e} value={e}>
-                {humanize(e)}s
+                {ENTITY_LABEL[e]}
               </SelectItem>
             ))}
           </SelectContent>

@@ -9,7 +9,7 @@ import { EnrollmentCards } from "@/components/enrollment/EnrollmentCards";
 import { ErrorBanner } from "@/components/layout/ErrorBanner";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { AssignmentsTable } from "@/components/observers/AssignmentsTable";
-import { ConfirmDialog } from "@/components/observers/ConfirmDialog";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { ObserverStateBadge } from "@/components/status/badges";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";

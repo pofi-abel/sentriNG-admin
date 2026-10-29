@@ -1,4 +1,5 @@
-// Confirms an action that changes credentials. With `typeToConfirm`, the operator types it first (revoking a phone)
+// Confirms an action that changes credentials. With `typeToConfirm`, the operator types it first (revoking a phone,
+// disabling an account)
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";

@@ -16,6 +16,9 @@ import { Route as AdminAssignmentsRouteImport } from './routes/_admin/assignment
 import { Route as AdminAuditRouteImport } from './routes/_admin/audit'
 import { Route as AdminImportRouteImport } from './routes/_admin/import'
 import { Route as AdminOnboardingRouteImport } from './routes/_admin/onboarding'
+import { Route as AdminReferenceRouteImport } from './routes/_admin/reference'
+import { Route as AdminAnalystsIndexRouteImport } from './routes/_admin/analysts/index'
+import { Route as AdminAnalystsIdRouteImport } from './routes/_admin/analysts/$id'
 import { Route as AdminObserversIndexRouteImport } from './routes/_admin/observers/index'
 import { Route as AdminObserversRefRouteImport } from './routes/_admin/observers/$ref'
 
@@ -53,6 +56,21 @@ const AdminOnboardingRoute = AdminOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminReferenceRoute = AdminReferenceRouteImport.update({
+  id: '/reference',
+  path: '/reference',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnalystsIndexRoute = AdminAnalystsIndexRouteImport.update({
+  id: '/analysts/',
+  path: '/analysts/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnalystsIdRoute = AdminAnalystsIdRouteImport.update({
+  id: '/analysts/$id',
+  path: '/analysts/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminObserversIndexRoute = AdminObserversIndexRouteImport.update({
   id: '/observers/',
   path: '/observers/',
@@ -71,7 +89,10 @@ export interface FileRoutesByFullPath {
   '/audit': typeof AdminAuditRoute
   '/import': typeof AdminImportRoute
   '/onboarding': typeof AdminOnboardingRoute
+  '/reference': typeof AdminReferenceRoute
+  '/analysts/$id': typeof AdminAnalystsIdRoute
   '/observers/$ref': typeof AdminObserversRefRoute
+  '/analysts/': typeof AdminAnalystsIndexRoute
   '/observers/': typeof AdminObserversIndexRoute
 }
 export interface FileRoutesByTo {
@@ -81,7 +102,10 @@ export interface FileRoutesByTo {
   '/audit': typeof AdminAuditRoute
   '/import': typeof AdminImportRoute
   '/onboarding': typeof AdminOnboardingRoute
+  '/reference': typeof AdminReferenceRoute
+  '/analysts/$id': typeof AdminAnalystsIdRoute
   '/observers/$ref': typeof AdminObserversRefRoute
+  '/analysts': typeof AdminAnalystsIndexRoute
   '/observers': typeof AdminObserversIndexRoute
 }
 export interface FileRoutesById {
@@ -93,7 +117,10 @@ export interface FileRoutesById {
   '/_admin/audit': typeof AdminAuditRoute
   '/_admin/import': typeof AdminImportRoute
   '/_admin/onboarding': typeof AdminOnboardingRoute
+  '/_admin/reference': typeof AdminReferenceRoute
+  '/_admin/analysts/$id': typeof AdminAnalystsIdRoute
   '/_admin/observers/$ref': typeof AdminObserversRefRoute
+  '/_admin/analysts/': typeof AdminAnalystsIndexRoute
   '/_admin/observers/': typeof AdminObserversIndexRoute
 }
 export interface FileRouteTypes {
@@ -105,7 +132,10 @@ export interface FileRouteTypes {
     | '/audit'
     | '/import'
     | '/onboarding'
+    | '/reference'
+    | '/analysts/$id'
     | '/observers/$ref'
+    | '/analysts/'
     | '/observers/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -115,7 +145,10 @@ export interface FileRouteTypes {
     | '/audit'
     | '/import'
     | '/onboarding'
+    | '/reference'
+    | '/analysts/$id'
     | '/observers/$ref'
+    | '/analysts'
     | '/observers'
   id:
     | '__root__'
@@ -126,7 +159,10 @@ export interface FileRouteTypes {
     | '/_admin/audit'
     | '/_admin/import'
     | '/_admin/onboarding'
+    | '/_admin/reference'
+    | '/_admin/analysts/$id'
     | '/_admin/observers/$ref'
+    | '/_admin/analysts/'
     | '/_admin/observers/'
   fileRoutesById: FileRoutesById
 }
@@ -187,6 +223,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminOnboardingRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_admin/reference': {
+      id: '/_admin/reference'
+      path: '/reference'
+      fullPath: '/reference'
+      preLoaderRoute: typeof AdminReferenceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/analysts/': {
+      id: '/_admin/analysts/'
+      path: '/analysts'
+      fullPath: '/analysts/'
+      preLoaderRoute: typeof AdminAnalystsIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/analysts/$id': {
+      id: '/_admin/analysts/$id'
+      path: '/analysts/$id'
+      fullPath: '/analysts/$id'
+      preLoaderRoute: typeof AdminAnalystsIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_admin/observers/': {
       id: '/_admin/observers/'
       path: '/observers'
@@ -209,7 +266,10 @@ interface AdminRouteChildren {
   AdminAuditRoute: typeof AdminAuditRoute
   AdminImportRoute: typeof AdminImportRoute
   AdminOnboardingRoute: typeof AdminOnboardingRoute
+  AdminReferenceRoute: typeof AdminReferenceRoute
+  AdminAnalystsIdRoute: typeof AdminAnalystsIdRoute
   AdminObserversRefRoute: typeof AdminObserversRefRoute
+  AdminAnalystsIndexRoute: typeof AdminAnalystsIndexRoute
   AdminObserversIndexRoute: typeof AdminObserversIndexRoute
 }
 
@@ -218,7 +278,10 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminAuditRoute: AdminAuditRoute,
   AdminImportRoute: AdminImportRoute,
   AdminOnboardingRoute: AdminOnboardingRoute,
+  AdminReferenceRoute: AdminReferenceRoute,
+  AdminAnalystsIdRoute: AdminAnalystsIdRoute,
   AdminObserversRefRoute: AdminObserversRefRoute,
+  AdminAnalystsIndexRoute: AdminAnalystsIndexRoute,
   AdminObserversIndexRoute: AdminObserversIndexRoute,
 }
 

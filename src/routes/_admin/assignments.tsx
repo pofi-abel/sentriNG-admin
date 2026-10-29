@@ -2,7 +2,7 @@
 // corrected file can simply be imported again. Single changes are on each observer's page
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckmarkCircle02Icon } from "@hugeicons/core-free-icons";
+import { ArrowLeft01Icon, CheckmarkCircle02Icon } from "@hugeicons/core-free-icons";
 import { CsvFileInput, CsvProblems } from "@/components/imports/CsvImport";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,18 @@ function AssignmentsPage() {
 
   return (
     <div className="max-w-4xl space-y-5">
-      <PageHeader title="Assignments" />
+      <PageHeader
+        title={
+          <span className="inline-flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/observers" aria-label="Back to observers">
+                <Icon icon={ArrowLeft01Icon} />
+              </Link>
+            </Button>
+            Assignments
+          </span>
+        }
+      />
       <p className="max-w-2xl text-muted-foreground">
         A CSV with <code className="font-mono text-foreground">observer_ref</code> and{" "}
         <code className="font-mono text-foreground">pu_code</code> columns, one assignment per row. It only adds: to take a

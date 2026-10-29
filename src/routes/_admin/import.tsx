@@ -1,9 +1,9 @@
 // Roster import (admin plan §5.1): a CSO roster in, one-time codes out, printed as enrollment cards for the training
 // session. Codes exist only on this page and only until it's left: reprinting means re-issuing
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { Alert02Icon, PrinterIcon } from "@hugeicons/core-free-icons";
+import { Alert02Icon, ArrowLeft01Icon, PrinterIcon } from "@hugeicons/core-free-icons";
 import { CodesGuard } from "@/components/enrollment/CodesGuard";
 import { EnrollmentCards } from "@/components/enrollment/EnrollmentCards";
 import { CsvFileInput, CsvProblems } from "@/components/imports/CsvImport";
@@ -40,7 +40,18 @@ function ImportRosterPage() {
 
   return (
     <div className="max-w-4xl space-y-5">
-      <PageHeader title="Import roster" />
+      <PageHeader
+        title={
+          <span className="inline-flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/observers" aria-label="Back to observers">
+                <Icon icon={ArrowLeft01Icon} />
+              </Link>
+            </Button>
+            Import roster
+          </span>
+        }
+      />
       <p className="max-w-2xl text-muted-foreground">
         A CSV with a <code className="font-mono text-foreground">ref</code> column and an optional{" "}
         <code className="font-mono text-foreground">cso</code> column, one observer per row. Each observer gets a one-time

@@ -14,6 +14,27 @@ export interface Analyst {
   email: string;
 }
 
+// --- Analysts ------------------------------------------------------------------------------------------------------
+
+/** Every account, admins included. Admin accounts are read-only here: they change only through the API's CLI */
+export interface AdminAnalyst {
+  id: number;
+  email: string;
+  name: string;
+  is_admin: boolean;
+  disabled: boolean;
+  /** A password and an authenticator secret are both set, so the account can log in */
+  mfa_enrolled: boolean;
+  created_at: string;
+}
+
+/** New sign-in details, returned once: never cache or log them. Create sets both; a reset sets one */
+export interface AnalystCredentials {
+  analyst: AdminAnalyst;
+  password?: string;
+  otpauth_uri?: string;
+}
+
 // --- Observers -----------------------------------------------------------------------------------------------------
 
 /** The list's ?status= filter. "unassigned" is about polling units, the rest about the device */
@@ -81,10 +102,11 @@ export interface ImportAssignmentsResult {
 
 // --- Oversight -----------------------------------------------------------------------------------------------------
 
-export const AUDIT_ENTITIES = ["observer", "result", "incident", "escalation"] as const;
+export const AUDIT_ENTITIES = ["observer", "analyst", "result", "incident", "escalation", "election", "reference"] as const;
 export type AuditEntity = (typeof AUDIT_ENTITIES)[number];
 
-/** One audit_log row, newest first. entity_label: observer ref, the result's PU code, incident uuid or "#12" */
+/** One audit_log row, newest first. entity_label: observer ref, analyst email, election name, the result's PU code,
+ * incident uuid or "#12". A reference import has none (to_status names the kind, reason sums up the diff) */
 export interface AuditLogRow {
   id: number;
   entity_type: AuditEntity;
@@ -132,4 +154,46 @@ export interface OnboardingSummary {
   totals: OnboardingByCSO;
   by_cso: OnboardingByCSO[];
   by_state: OnboardingByState[];
+}
+
+// --- Reference data ------------------------------------------------------------------------------------------------
+
+export const RACES = ["presidential", "senate", "reps", "governorship", "state_assembly"] as const;
+export type Race = (typeof RACES)[number];
+
+export interface Election {
+  id: number;
+  name: string;
+  race: Race;
+  /** A date at midnight UTC, as RFC3339 */
+  held_on: string;
+  /** INEC state codes; [] = nationwide */
+  state_codes: string[];
+}
+
+export interface State {
+  code: string;
+  name: string;
+}
+
+/** Same columns as the API's cmd/seed */
+export const REFERENCE_KINDS = ["polling-units", "parties", "elections"] as const;
+export type ReferenceKind = (typeof REFERENCE_KINDS)[number];
+
+export interface ReferenceChange {
+  noun: string;
+  change: string;
+  count: number;
+  /** "312 new polling units" */
+  text: string;
+  /** Up to five of the changed rows */
+  examples: string[];
+}
+
+/** What an import changed (applied) or would change (dry run). Imports only add and update, never delete */
+export interface ReferenceImportResult {
+  kind: ReferenceKind;
+  applied: boolean;
+  rows: number;
+  changes: ReferenceChange[];
 }

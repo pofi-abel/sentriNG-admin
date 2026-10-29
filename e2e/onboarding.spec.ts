@@ -1,5 +1,6 @@
 // Import → print → enroll (as the field app would) → assign → re-issue → revoke, then the audit log and onboarding
-// progress show it all. One run of what an operator does at a training session and on election morning
+// progress show it all. One run of what an operator does at a training session and on election morning. The first
+// test is the login itself, so it doesn't use loginAsAdmin
 import { expect, test, type Page } from "@playwright/test";
 import { E2E_ADMIN } from "./global-setup";
 import { enrollBody, totp } from "./helpers";
@@ -62,7 +63,7 @@ test("a printed code enrolls a phone, and leaving the sheet asks first", async (
 
   await page.getByRole("link", { name: "Observers" }).click();
   await expect(page.getByRole("dialog", { name: "Leave without printing?" })).toBeVisible();
-  await page.getByRole("button", { name: "Leave and discard codes" }).click();
+  await page.getByRole("button", { name: "Leave and discard" }).click();
 
   await page.getByRole("searchbox", { name: "Search by ref or CSO" }).fill(REF);
   await page.getByRole("searchbox", { name: "Search by ref or CSO" }).press("Enter");

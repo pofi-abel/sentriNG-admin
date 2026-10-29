@@ -136,4 +136,8 @@
     height: 64mm;
     break-inside: avoid;
   }
+  /* A credential slip prints alone: as tall as its content */
+  .sn-slip {
+    height: auto;
+  }
 }

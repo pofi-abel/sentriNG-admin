@@ -1,5 +1,6 @@
 // Status chips. Brand §3: red / amber / green mean status and nothing else, and status always shows icon + label + colour
 import { Alert02Icon, CheckmarkCircle02Icon, HourglassIcon, UserBlock01Icon } from "@hugeicons/core-free-icons";
+import type { AdminAnalyst } from "@/lib/types";
 import { Icon, type IconSvgElement } from "@/components/ui/icon";
 import type { ObserverState } from "@/lib/observers";
 import { cn } from "@/lib/utils";
@@ -27,3 +28,16 @@ const OBSERVER_STATE: Record<ObserverState, Look> = {
 };
 
 export const ObserverStateBadge = ({ state }: { state: ObserverState }) => <Chip look={OBSERVER_STATE[state]} />;
+
+/** Disabled wins: a disabled account can't log in whatever else is set */
+const analystLook = (a: AdminAnalyst): Look =>
+  a.disabled
+    ? { label: "Disabled", icon: UserBlock01Icon, className: "text-critical bg-critical-soft" }
+    : !a.mfa_enrolled
+      ? { label: "Can't log in", icon: Alert02Icon, className: "text-warning bg-warning-soft" }
+      : { label: "Active", icon: CheckmarkCircle02Icon, className: "text-verified bg-verified-soft" };
+
+export const AnalystStateBadge = ({ analyst }: { analyst: AdminAnalyst }) => <Chip look={analystLook(analyst)} />;
+
+/** A role, not a status: neutral, no icon */
+export const AdminRoleBadge = () => <Chip look={{ label: "Admin", className: "text-foreground bg-surface-raised" }} />;
