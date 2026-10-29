@@ -1,0 +1,139 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./brand/tokens.css";
+@import "@fontsource-variable/inter";
+@import "@fontsource/noto-sans-mono/400.css";
+@import "@fontsource/noto-sans-mono/500.css";
+
+/* The console is dark only (brand §3). shadcn's variables point at the brand's semantic tokens, so
+   components never use raw colours; re-check contrast if you add a new text/background pair. */
+:root {
+  --background: var(--sn-bg);
+  --foreground: var(--sn-text);
+  --card: var(--sn-surface);
+  --card-foreground: var(--sn-text);
+  --popover: var(--sn-surface-raised);
+  --popover-foreground: var(--sn-text);
+  --primary: var(--sn-accent);
+  --primary-foreground: var(--sn-on-accent);
+  --secondary: var(--sn-surface-raised);
+  --secondary-foreground: var(--sn-text);
+  --muted: var(--sn-surface-raised);
+  --muted-foreground: var(--sn-text-muted);
+  --accent: var(--sn-surface-raised);
+  --accent-foreground: var(--sn-text);
+  --destructive: var(--sn-critical);
+  --border: var(--sn-border);
+  --input: var(--sn-border);
+  --ring: var(--sn-focus);
+  --radius: var(--sn-radius-md);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: var(--sn-radius-sm);
+  --radius-md: var(--sn-radius-md);
+  --radius-lg: var(--sn-radius-md);
+  --radius-xl: var(--sn-radius-lg);
+
+  /* Status: fixed meaning, always shown with an icon and a label */
+  --color-critical: var(--sn-critical);
+  --color-critical-soft: var(--sn-critical-soft);
+  --color-warning: var(--sn-warning);
+  --color-warning-soft: var(--sn-warning-soft);
+  --color-verified: var(--sn-verified);
+  --color-verified-soft: var(--sn-verified-soft);
+  --color-pending: var(--sn-pending);
+  --color-in-review: var(--sn-in-review);
+  --color-accent-soft: var(--sn-accent-soft);
+  --color-surface: var(--sn-surface);
+  --color-surface-raised: var(--sn-surface-raised);
+
+  --color-cat-thuggery: var(--sn-cat-thuggery);
+  --color-cat-vote-buying: var(--sn-cat-vote-buying);
+  --color-cat-logistics: var(--sn-cat-logistics);
+  --color-cat-natural: var(--sn-cat-natural);
+  --color-cat-other: var(--sn-cat-other);
+
+  --font-sans: "Inter Variable", var(--sn-font-sans);
+  --font-mono: var(--sn-font-mono);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-size: 16px;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: var(--sn-text-sm);
+    min-width: 1280px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--sn-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Vote counts line up (brand §4) */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The login image settles in once when the page opens */
+@keyframes sn-fade {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sn-reveal {
+    animation: sn-fade 0.9s ease-out;
+  }
+}
+
+/* Enrollment cards (brand §6): printed on Paper with Ink text, whatever the screen theme. On screen they preview
+   exactly what prints. Two columns by four rows fill an A4 page; a card never splits across pages */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+@media print {
+  body {
+    min-width: 0;
+    background: #fff;
+  }
+}
+.sn-card-sheet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6mm;
+}
+@media print {
+  .sn-card-sheet {
+    gap: 5mm;
+  }
+  .sn-card {
+    height: 64mm;
+    break-inside: avoid;
+  }
+}

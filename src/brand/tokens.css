@@ -1,0 +1,111 @@
+/* SentriNG design tokens — shared by Desk, Live and Admin (web).
+   Field (Flutter) maps the same values; see 05-brand-system.md §Flutter.
+   Dark is the default (Field, Desk, Admin). Live sets data-theme="light" on <html>.
+   Party colours are NOT here: they live only in each portal's party config. */
+
+:root {
+  /* Brand primitives — never change per portal */
+  --sn-ink: #0D1117;
+  --sn-graphite: #1C232C;
+  --sn-paper: #F5F2EA;
+  --sn-fog: #9AA4B0;
+  --sn-cyan: #2EC4D6;
+  --sn-cyan-deep: #09707F;
+
+  /* Type */
+  --sn-font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sn-font-mono: "Noto Sans Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --sn-text-xs: 0.75rem;   /* 12 — chips, table meta */
+  --sn-text-sm: 0.875rem;  /* 14 — desk body, captions */
+  --sn-text-md: 1rem;      /* 16 — field + live body */
+  --sn-text-lg: 1.25rem;   /* 20 — section titles */
+  --sn-text-xl: 1.75rem;   /* 28 — screen titles, tickers */
+  --sn-text-2xl: 2.5rem;   /* 40 — live headline figures */
+
+  /* Space (4 px base), radius, stroke */
+  --sn-space-1: 4px;
+  --sn-space-2: 8px;
+  --sn-space-3: 12px;
+  --sn-space-4: 16px;
+  --sn-space-6: 24px;
+  --sn-space-8: 32px;
+  --sn-radius-sm: 4px;     /* chips, inputs */
+  --sn-radius-md: 8px;     /* buttons, cards */
+  --sn-radius-lg: 16px;    /* sheets, field tiles */
+  --sn-stroke: 1.5px;      /* matches Hugeicons stroke-rounded */
+  --sn-tap: 48px;          /* minimum touch target (field, live) */
+
+  /* Theme: dark (default) */
+  --sn-bg: var(--sn-ink);
+  --sn-surface: #161C24;
+  --sn-surface-raised: var(--sn-graphite);
+  --sn-border: #2E3946;
+  --sn-text: var(--sn-paper);
+  --sn-text-muted: var(--sn-fog);
+  --sn-accent: var(--sn-cyan);
+  --sn-on-accent: var(--sn-ink);
+  --sn-focus: var(--sn-cyan);
+
+  /* Semantic — status is never shown by colour alone (icon + label always) */
+  --sn-critical: #F2555A;
+  --sn-warning: #F5A524;
+  --sn-verified: #3DB87A;
+  --sn-pending: var(--sn-fog);
+  --sn-in-review: var(--sn-cyan);
+  --sn-critical-soft: rgba(242, 85, 90, 0.14);
+  --sn-warning-soft: rgba(245, 165, 36, 0.14);
+  --sn-verified-soft: rgba(61, 184, 122, 0.14);
+  --sn-accent-soft: rgba(46, 196, 214, 0.14);
+
+  /* Incident categories (Okabe-Ito based, colour-blind safe) */
+  --sn-cat-thuggery: #F07A2A;
+  --sn-cat-vote-buying: #DB8FBD;
+  --sn-cat-logistics: #E9B10F;
+  --sn-cat-natural: #4BA3E0;
+  --sn-cat-other: var(--sn-fog);
+
+  /* Coverage choropleth: single-hue accent ramp, low → high */
+  --sn-cov-0: #142A31;     /* no verified data yet (hatch it too) */
+  --sn-cov-1: #15434E;
+  --sn-cov-2: #186575;
+  --sn-cov-3: #1F8EA0;
+  --sn-cov-4: #2EC4D6;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --sn-bg: var(--sn-paper);
+  --sn-surface: #FFFFFF;
+  --sn-surface-raised: #ECE8DE;
+  --sn-border: #D6D0C2;
+  --sn-text: var(--sn-ink);
+  --sn-text-muted: #545E69;
+  --sn-accent: var(--sn-cyan-deep);
+  --sn-on-accent: #FFFFFF;
+  --sn-focus: var(--sn-cyan-deep);
+
+  --sn-critical: #C42B30;
+  --sn-warning: #8C5400;
+  --sn-verified: #18703F;
+  --sn-pending: #545E69;
+  --sn-in-review: var(--sn-cyan-deep);
+  --sn-critical-soft: rgba(196, 43, 48, 0.10);
+  --sn-warning-soft: rgba(140, 84, 0, 0.10);
+  --sn-verified-soft: rgba(24, 112, 63, 0.10);
+  --sn-accent-soft: rgba(9, 112, 127, 0.10);
+
+  --sn-cat-thuggery: #B84A00;
+  --sn-cat-vote-buying: #A64E86;
+  --sn-cat-logistics: #8F6400;
+  --sn-cat-natural: #0067A3;
+  --sn-cat-other: #545E69;
+
+  --sn-cov-0: #E6E1D6;
+  --sn-cov-1: #CDE9EC;
+  --sn-cov-2: #8ACFD8;
+  --sn-cov-3: #3BA6B5;
+  --sn-cov-4: #09707F;
+
+  color-scheme: light;
+}
